@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Tracing;
 using webapi.eventplus.Domains;
 using webapi.eventplus.Interfaces;
 using webapi.eventplus.Repositories;
@@ -9,20 +10,21 @@ namespace webapi.eventplus.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
-    public class UsuarioController : ControllerBase
+    public class ComentarioEventoController : ControllerBase
     {
-        private IUsuarioRepository _usuarioRepository { get; set; }
-        public UsuarioController()
+        private IComentarioEventoRepository _comentarioEventoRepository;
+
+        public ComentarioEventoController()
         {
-            _usuarioRepository = new UsuarioRepository();
+            _comentarioEventoRepository = new ComentarioEventoRepository();
         }
 
         [HttpPost]
-        public IActionResult Post(Usuario usuarioCadastrado) 
+        public IActionResult Post(ComentarioEvento comentarioEvento)
         {
             try
             {
-                _usuarioRepository.Cadastrar(usuarioCadastrado);
+                _comentarioEventoRepository.Cadastrar(comentarioEvento);
                 return StatusCode(201);
             }
             catch (Exception e)
@@ -32,12 +34,13 @@ namespace webapi.eventplus.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(Guid id)
+        public IActionResult Get()
         {
             try
             {
-                Usuario usuarioBuscado = _usuarioRepository.BuscarPorId(id);
-                return Ok(usuarioBuscado);
+                List<ComentarioEvento> listaComentario = _comentarioEventoRepository.Listar();
+
+                return Ok(listaComentario);
             }
             catch (Exception e)
             {
@@ -45,14 +48,13 @@ namespace webapi.eventplus.Controllers
             }
         }
 
-        [HttpGet("EmailESenha")]
-        public IActionResult Get(string email, string senha)
+        [HttpDelete]
+        public IActionResult Delete(Guid id)
         {
             try
             {
-                Usuario usuarioBuscado = _usuarioRepository.BuscarPorEmailESenha(email, senha);
-
-                return Ok(usuarioBuscado);
+                _comentarioEventoRepository.Deletar(id);
+                return StatusCode(201);
             }
             catch (Exception e)
             {

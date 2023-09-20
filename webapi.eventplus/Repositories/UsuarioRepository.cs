@@ -14,14 +14,41 @@ namespace webapi.eventplus.Repositories
         }
         public void Atualizar(Guid id, Usuario usuarioAtualizado)
         {
-            throw new NotImplementedException();
+            try
+            {
+               Usuario usuarioBuscado = BuscarPorId(usuarioAtualizado.IdUsuario);
+                if (usuarioBuscado != null)
+                {
+                    usuarioBuscado.Nome = usuarioAtualizado.Nome;
+                }  
+                c.Usuario.Update(usuarioBuscado!);
+                c.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Usuario BuscarPorEmailESenha(string Email, string Senha)
         {
             try
             {
-                Usuario usuarioBuscado = c.Usuario.FirstOrDefault(u => u.Email == Email)!;
+               Usuario usuarioBuscado = c.Usuario
+                .Select(u => new Usuario
+                     {
+                        IdUsuario = u.IdUsuario,
+                        IdTipoUsuario = u.IdTipoUsuario,
+                        Nome = u.Nome,
+                        Email = u.Email,
+                        Senha = u.Senha,
+                        TipoUsuario = new TipoUsuario
+                        {
+                         Titulo = u.TipoUsuario!.Titulo
+                        }
+
+                }).FirstOrDefault(u => u.Email == Email)!;
 
                 if (usuarioBuscado != null)
                 {
@@ -32,7 +59,7 @@ namespace webapi.eventplus.Repositories
                         return usuarioBuscado;
                     }
                 }
-                return null;
+                return null!;
             }
             catch (Exception)
             {
@@ -83,12 +110,25 @@ namespace webapi.eventplus.Repositories
 
         public void Deletar(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Usuario usuarioBuscado = BuscarPorId(id);
+                    if (usuarioBuscado != null)
+                    {
+                        c.Remove(usuarioBuscado);
+                        c.SaveChanges();
+                    }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+          
         }
 
         public List<Usuario> ListarTodos()
         {
-            throw new NotImplementedException();
+            return c.Usuario.ToList();
         }
     }
 }

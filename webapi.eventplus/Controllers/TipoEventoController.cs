@@ -9,20 +9,21 @@ namespace webapi.eventplus.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
-    public class TipoUsuarioController : ControllerBase
+    public class TipoEventoController : ControllerBase
     {
-        private ITipoUsuarioRepository _tipoUsuarioRepository { get; set; }
-        public TipoUsuarioController()
+        private ITipoEventoRepository _tipoEventoRepository;
+
+        public TipoEventoController()
         {
-            _tipoUsuarioRepository = new TipoUsuarioRepository();
+            _tipoEventoRepository = new TipoEventoRepository();
         }
 
-        [HttpPost] 
-        public IActionResult Post(TipoUsuario usuarioCadastrado)
+        [HttpPost]
+        IActionResult Post(TipoEvento eventoCadastrado)
         {
             try
             {
-                _tipoUsuarioRepository.Cadastrar(usuarioCadastrado);
+                _tipoEventoRepository.Cadastrar(eventoCadastrado);
                 return StatusCode(201);
             }
             catch (Exception e)
@@ -36,8 +37,9 @@ namespace webapi.eventplus.Controllers
         {
             try
             {
-                List<TipoUsuario> listaUsuario = _tipoUsuarioRepository.ListarTodos();
-                return Ok(listaUsuario);
+                List<TipoEvento> listaEventos = _tipoEventoRepository.ListarTodos();
+
+                return Ok(listaEventos);
             }
             catch (Exception e)
             {
@@ -50,7 +52,7 @@ namespace webapi.eventplus.Controllers
         {
             try
             {
-                TipoUsuario tipoBuscado = _tipoUsuarioRepository.BuscarPorId(id);
+                TipoEvento tipoBuscado = _tipoEventoRepository.BuscarPorId(id);
                 return Ok(tipoBuscado);
             }
             catch (Exception e)
@@ -64,7 +66,7 @@ namespace webapi.eventplus.Controllers
         {
             try
             {
-                _tipoUsuarioRepository.Deletar(id);
+                _tipoEventoRepository.Deletar(id);
                 return StatusCode(201);
             }
             catch (Exception e)
@@ -74,11 +76,12 @@ namespace webapi.eventplus.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, TipoUsuario tipoUsuario)
+        public IActionResult Put(Guid id, TipoEvento tipoEvento)
         {
             try
             {
-                _tipoUsuarioRepository.Atualizar(id, tipoUsuario);
+                _tipoEventoRepository.Atualizar(id, tipoEvento);
+
                 return StatusCode(201);
             }
             catch (Exception e)

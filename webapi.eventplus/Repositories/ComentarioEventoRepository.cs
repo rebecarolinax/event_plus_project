@@ -4,28 +4,24 @@ using webapi.eventplus.Interfaces;
 
 namespace webapi.eventplus.Repositories
 {
-    public class TipoUsuarioRepository : ITipoUsuarioRepository
+    public class ComentarioEventoRepository : IComentarioEventoRepository
     {
         private readonly EventContext c;
-        public TipoUsuarioRepository()
+        public ComentarioEventoRepository()
         {
             c = new EventContext();
         }
-        public void Atualizar(Guid id, TipoUsuario usuarioAtualizado)
+
+        public ComentarioEvento BuscarPorId(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public TipoUsuario BuscarPorId(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Cadastrar(TipoUsuario usuarioCadastrado)
+        public void Cadastrar(ComentarioEvento comentarioEvento)
         {
             try
             {
-                c.TipoUsuario.Add(usuarioCadastrado);
+                c.ComentarioEvento.Add(comentarioEvento);
                 c.SaveChanges();
             }
             catch (Exception)
@@ -38,11 +34,12 @@ namespace webapi.eventplus.Repositories
         {
             try
             {
-                TipoUsuario usuarioBuscado = c.TipoUsuario.Find(id)!;
-
-                c.TipoUsuario.Remove(usuarioBuscado);
-
-                c.SaveChanges();
+                ComentarioEvento comentarioBuscado = BuscarPorId(id);
+                if (comentarioBuscado != null)
+                {
+                    c.Remove(comentarioBuscado);
+                    c.SaveChanges();
+                }
             }
             catch (Exception)
             {
@@ -50,11 +47,11 @@ namespace webapi.eventplus.Repositories
             }
         }
 
-        public List<TipoUsuario> ListarTodos()
+        public List<ComentarioEvento> Listar()
         {
             try
             {
-               return c.TipoUsuario.ToList();
+                return c.ComentarioEvento.ToList();
             }
             catch (Exception)
             {
