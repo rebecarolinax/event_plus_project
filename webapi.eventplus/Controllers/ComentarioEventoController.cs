@@ -20,46 +20,68 @@ namespace webapi.eventplus.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(ComentarioEvento comentarioEvento)
+        public IActionResult Post(ComentarioEvento comentariosEvento)
         {
             try
             {
-                _comentarioEventoRepository.Cadastrar(comentarioEvento);
+                _comentarioEventoRepository.Cadastrar(comentariosEvento);
+
                 return StatusCode(201);
             }
             catch (Exception e)
             {
+
                 return BadRequest(e.Message);
             }
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Listas()
         {
             try
             {
-                List<ComentarioEvento> listaComentario = _comentarioEventoRepository.Listar();
+                List<ComentarioEvento> lista = _comentarioEventoRepository.Listar();
 
-                return Ok(listaComentario);
+                return Ok(lista);
             }
             catch (Exception e)
             {
+
                 return BadRequest(e.Message);
             }
         }
 
         [HttpDelete]
-        public IActionResult Delete(Guid id)
+        public IActionResult Deletar(Guid id)
         {
             try
             {
                 _comentarioEventoRepository.Deletar(id);
+
                 return StatusCode(201);
+
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("BuscarPorId")]
+        public IActionResult Buscar(Guid id)
+        {
+            try
+            {
+                ComentarioEvento comentariosEvento = _comentarioEventoRepository.BuscarPorId(id);
+
+                return Ok(comentariosEvento);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
+
     }
 }

@@ -19,16 +19,18 @@ namespace webapi.eventplus.Controllers
         }
 
         [HttpPost]
-        IActionResult Post(TipoEvento eventoCadastrado)
+        public IActionResult Post(TipoEvento tiposEvento)
         {
             try
             {
-                _tipoEventoRepository.Cadastrar(eventoCadastrado);
+                _tipoEventoRepository.Cadastrar(tiposEvento);
+
                 return StatusCode(201);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return BadRequest(e.Message);
+
+                throw;
             }
         }
 

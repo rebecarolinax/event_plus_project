@@ -13,12 +13,28 @@ namespace webapi.eventplus.Repositories
         }
         public void Atualizar(Guid id, TipoUsuario usuarioAtualizado)
         {
-            throw new NotImplementedException();
+            try
+            {
+                TipoUsuario tipoUsuarioBuscado = c.TipoUsuario.Find(id)!;
+
+                            if (tipoUsuarioBuscado != null)
+                            {
+                                tipoUsuarioBuscado.Titulo = usuarioAtualizado.Titulo;
+                            }
+
+                            c.TipoUsuario.Update(tipoUsuarioBuscado!);
+
+                            c.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public TipoUsuario BuscarPorId(Guid id)
         {
-            throw new NotImplementedException();
+            return c.TipoUsuario.FirstOrDefault(a => a.IdTipoUsuario == id)!;
         }
 
         public void Cadastrar(TipoUsuario usuarioCadastrado)

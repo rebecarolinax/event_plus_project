@@ -14,7 +14,43 @@ namespace webapi.eventplus.Repositories
 
         public ComentarioEvento BuscarPorId(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                ComentarioEvento comentarioBuscado = c.ComentarioEvento
+                   .Select(c => new ComentarioEvento
+                   {
+                       IdComentarioEvento = c.IdComentarioEvento,
+                       Descricao = c.Descricao,
+                       Exibe = c.Exibe,
+                       IdUsuario = c.IdUsuario,
+
+                       Usuario = new Usuario
+                       {
+                           IdUsuario = c.IdUsuario,
+                           Nome = c.Usuario!.Nome
+                       },
+
+                       IdEvento = c.IdEvento,
+
+                       Evento = new Evento
+                       {
+                           IdEvento = c.IdEvento,
+                           NomeEvento = c.Evento!.NomeEvento
+
+                       }
+                   }).FirstOrDefault(c => c.IdComentarioEvento == id)!;
+
+                if (comentarioBuscado != null)
+                {
+                    return comentarioBuscado!;
+                }
+
+                return null!;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Cadastrar(ComentarioEvento comentarioEvento)
