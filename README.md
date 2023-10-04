@@ -1,4 +1,4 @@
-# Event_Plus 🎆
+# Event Plus 🎆
 A escola **DevSchool**, especializada em desenvolvimento de sistemas, foi criada pelos educadores
 Carlos Roque e Eduardo Costa, em 2023, na cidade de São Caetano do Sul. Carlos e Eduardo tem
 uma equipe de educadores que vêm do mercado de TI.
