@@ -1,11 +1,11 @@
 import React from 'react';
 import './EventosPage.css';
-import Titulo from "../../components/Titulo/Titulo";
+import Title from '../../components/Title/Title';
 
 const EventosPage = () => {
     return (
         <div>
-            <Titulo titleText={"Eventos"} additionalClass={"cor-titulo"} />
+            <Title titleText="Eventos" marginTop='margin_top'/>
         </div>
     );
 };

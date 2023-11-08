@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
+import Title from '../../components/Title/Title';
 
 const TestePage = () => {
     const [n1, setN1] = useState(0);
@@ -14,7 +15,7 @@ const TestePage = () => {
 
     return (
         <div>
-            <h1>Testpage (Pagina de POCs)</h1>
+            <Title titleText="Testpage (Pagina de POCs)" marginTop='margin_top'/>
             <h2>Calculator</h2>
 
             <form onSubmit={handleCalcular}>
