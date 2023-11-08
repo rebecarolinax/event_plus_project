@@ -3,7 +3,7 @@ import "./NextEvent.css";
 
 const NextEvent = ({title, description, eventDate, idEvent}) => {
     function conectar(idEvent) {
-        alert(`Chamar o recurso para conectar: ${idEvent}`)
+        alert(`Conectar ao evento: ${idEvent}`)
     }
 
     return (

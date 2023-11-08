@@ -20,26 +20,26 @@ const HomePage = () => {
 
                         <div className='events-box'>
                             <NextEvent
-                                title={"Evento X"}
-                                description={"Evento legal"}
+                                title={"AMO MEU NAMORADO"}
+                                description={"Gustavo"}
                                 eventDate={"10/11/2023"}
                                 idEvent={"JKSNDXKJD"}
                             />
                             <NextEvent
-                                title={"Evento Y"}
-                                description={"Evento nem tão legal"}
+                                title={"AMO MEU NAMORADO"}
+                                description={"Gustavo"}
                                 eventDate={"11/11/2023"}
                                 idEvent={"KJFKGRG"}
                             />
                             <NextEvent
-                                title={"Evento Z"}
-                                description={"Evento mega legal"}
+                                title={"AMO MEU NAMORADO"}
+                                description={"Gustavo"}
                                 eventDate={"12/11/2023"}
                                 idEvent={"SDLFMLFLK"}
                             />
                             <NextEvent
-                                title={"Evento W"}
-                                description={"Evento um pouco legal"}
+                                title={"AMO MEU NAMORADO"}
+                                description={"Gustavo"}
                                 eventDate={"13/11/2023"}
                                 idEvent={"LKJIJFIHF"}
                             />
