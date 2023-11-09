@@ -23,8 +23,9 @@
     padding: 25px;
     border: 1px solid var(--color-blue-red);
     border-radius: 5px;
-    overflow: none;
+    overflow: auto;
 }
+
 
 .event-card__title {
     text-align: center;
