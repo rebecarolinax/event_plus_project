@@ -9,7 +9,7 @@
 }
 
 
-.tootip {
+.tooltip {
     color: #fff !important;
     background-color: #B51D44 !important;
   }
@@ -24,6 +24,10 @@
     border: 1px solid var(--color-blue-red);
     border-radius: 5px;
     overflow: auto;
+}
+
+.event-card::-webkit-scrollbar {
+  width: 0;
 }
 
 
