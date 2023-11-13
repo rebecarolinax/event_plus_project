@@ -24,7 +24,6 @@ const Nav = ({exibeNavbar, setExibeNavbar}) => {
                 <Link onClick={() => {setExibeNavbar(false)}} to="/" className='navbar__item'>Home</Link>
                 <Link onClick={() => {setExibeNavbar(false)}} to="/eventos" className='navbar__item'>Eventos</Link>
                 <Link onClick={() => {setExibeNavbar(false)}} to="/tiposeventos" className='navbar__item'>Tipos de Eventos</Link>
-                <Link onClick={() => {setExibeNavbar(false)}} to="/teste" className='navbar__item'>POCs</Link>
             </div>
         </nav>
     );
