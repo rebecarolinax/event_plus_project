@@ -22,6 +22,7 @@
 .button-component {
   width: 100%;
   height: 40px;
+  /* margin-top: 20px; */
   background-color: var(--color-red);
   font-family: Poppins-Regular;
   font-size: 1.125rem; /*se liga nesse cálculo :)*/

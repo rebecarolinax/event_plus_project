@@ -1,7 +1,7 @@
 import React from "react";
 import "./FormComponents.css";
 
-export const Input = (
+export const Input = ({
   type,
   id,
   value,
@@ -9,8 +9,8 @@ export const Input = (
   additionalClass = "",
   name,
   placeholder,
-  manipulationFunction
-) => {
+  manipulationFunction,
+}) => {
   return (
     <input
       type={type}
@@ -20,8 +20,29 @@ export const Input = (
       className={`input-component ${additionalClass}`}
       name={name}
       placeholder={placeholder}
-      manipulationFunction={manipulationFunction}
+      onChange={manipulationFunction}
       autoComplete="off"
     />
+  );
+};
+
+export const Button = ({
+  textButton,
+  id,
+  name,
+  type,
+  additionalClass = "",
+  manipulationFunction,
+}) => {
+  return (
+    <button
+      type={type}
+      name={name}
+      id={id}
+      className={`button-component ${additionalClass}`}
+      onClick={manipulationFunction}
+    >
+      {textButton}
+    </button>
   );
 };
