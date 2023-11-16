@@ -8,10 +8,18 @@ import ImageIllustrator from "../../components/ImageIllustrator/ImageIllustrator
 import eventTypeImage from "../../assets/images/images/tipo-evento.svg";
 import api from "../../Services/Service";
 import { Button, Input } from "../../components/FormComponents/FormComponents";
+import TableEventType from "./TableEventType/TableEventType";
 
 const TipoEventosPage = () => {
   const [frmEdit, setFrmEdit] = useState(false);
   const [titulo, setTitulo] = useState("");
+
+  // vai usar um State, sempre tenha um valor inicial.
+  const [tipoEventos, setTipoEventos] = useState([
+    { idTipoEvento: "123", titulo: "AMAR MEU NAMORADO" },
+    { idTipoEvento: "456", titulo: "REBECA CAROLINA" },
+  ]);
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (titulo.trim().length < 3) {
@@ -28,10 +36,22 @@ const TipoEventosPage = () => {
       console.log(error);
     }
   }
+
+  function showUpdateForm() {
+    alert("Mostrando a tela de Update");
+  }
+
   function handleUpdate() {
     alert("Bora atualizar!");
   }
 
+  function editActionAbort() {
+    alert("Cancelar a tela de edição de dados");
+  }
+
+  function handleDelete() {
+    alert("Bora lá apagar da api!");
+  }
   return (
     <MainContent>
       <section className="cadastro-evento-section">
@@ -70,6 +90,17 @@ const TipoEventosPage = () => {
               )}
             </form>
           </div>
+        </Container>
+      </section>
+
+      <section className="lista-eventos-section">
+        <Container>
+          <Title titleText={"Lista tipo eventos"} color="white" />
+          <TableEventType
+            dados={tipoEventos}
+            fnUpdate={showUpdateForm}
+            fnDelete={handleDelete}
+          />
         </Container>
       </section>
     </MainContent>
