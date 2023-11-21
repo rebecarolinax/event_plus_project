@@ -11,21 +11,26 @@ import { Button, Input } from "../../components/FormComponents/FormComponents";
 import TableEventType from "./TableEventType/TableEventType";
 
 import Notification from "../../components/Notification/Notification";
+import Spinner from "../../components/Spinner/Spinner";
 
 const TipoEventosPage = () => {
-  const [frmEdit, setFrmEdit] = useState(false);
+  const [frmEdit, setFrmEdit] = useState(true);
   const [titulo, setTitulo] = useState("");
 
+  const [showSpinner, setShowSpinner] = useState(false);
   const [notifyUser, setNotifyUser] = useState({});
 
   // vai usar um State, sempre tenha um valor inicial.
   const [tipoEventos, setTipoEventos] = useState([]);
+
+  const [idEvento, setIdEvento] = useState(null);
 
   // iniciada a lógica de trazer os dados diretamente da API
   // usando useEffect() para
   useEffect(() => {
     // define a chamada em nossa api (chamada assíncrona)
     async function loadedEventsType() {
+      setShowSpinner(true);
       try {
         // usando o await para a espera da função "promisse"
         const retorno = await api.get("/TiposEvento");
@@ -37,6 +42,7 @@ const TipoEventosPage = () => {
         console.log("Erro na api");
         console.log(error);
       }
+      setShowSpinner(false);
     }
     // chama a função/api
     loadedEventsType();
@@ -48,10 +54,16 @@ const TipoEventosPage = () => {
       const promise = await api.delete(`${"/TiposEvento"}/${idTipoEvento}`);
       //  se statusCode == OK
       if (promise.status == 204) {
-        alert("Cadastro apagado com sucesso!");
         const buscaEventos = await api.get("/TiposEvento");
         setTipoEventos(buscaEventos.data);
       }
+      setNotifyUser({
+        titleNote: "Sucesso",
+        textNote: `Excluído com sucesso!`,
+        imgIcon: "danger",
+        imgAlt: "Imagem de ilustração de exclusão.",
+        showMessage: true,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +72,14 @@ const TipoEventosPage = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     if (titulo.trim().length < 3) {
-      alert("O título deve ter mais que três caracteres");
+      setNotifyUser({
+        titleNote: "Aviso",
+        textNote: `O título deve ter mais que três caracteres`,
+        imgIcon: "warning",
+        imgAlt:
+          "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
+        showMessage: true,
+      });
       return;
     }
     try {
@@ -75,6 +94,9 @@ const TipoEventosPage = () => {
         showMessage: true,
       });
 
+      const buscaEventos = await api.get("/TiposEvento");
+      setTipoEventos(buscaEventos.data);
+
       console.log(retorno.data);
 
       setTitulo("");
@@ -84,34 +106,63 @@ const TipoEventosPage = () => {
     }
   }
 
-  function showUpdateForm() {
+  async function showUpdateForm(idElement) {
     setFrmEdit(true);
+    setIdEvento(idElement);
+
+    try {
+      const retorno = await api.get(`${"/TiposEvento"}/${idElement}`);
+      setTitulo(retorno.data.titulo);
+      console.log(retorno.data);
+    } catch (error) {}
   }
 
-  function editActionAbort() {
+  function editActionAbort(e) {
     setFrmEdit(false);
+    setTitulo("");
+    setIdEvento(null);
   }
 
-  function handleUpdate() {}
+  async function handleUpdate(e) {
+    e.preventDefault();
 
-  // async function handleUpdate(idTipoEvento)
-  // {
-  //   // try {
-  //   //   const promise = await api.put(`${"/TiposEvento"}/${idTipoEvento}`);
-  //   //   //  se statusCode == OK
-  //   //   if (promise.status == 204) {
-  //   //     alert("Cadastro atualizado com sucesso!");
-  //   //     const buscaEventos = await api.get("/TiposEvento");
-  //   //     setTipoEventos(buscaEventos.data);
-  //   //   }
-  //   // } catch (error) {
-  //   //   console.log(error);
-  //   // }
-  // }
-
+    try {
+      //atualizar na API
+      const retorno = await api.put("/TiposEvento" + "/" + idEvento, {
+        titulo,
+      });
+      if (retorno.status === 204) {
+        //notifica o usuário que deu tudo certo
+        setNotifyUser({
+          titleNote: "Sucesso",
+          textNote: "Tipo de evento atualizado com sucesso",
+          imgIcon: "success",
+          imgAlt:
+            "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
+          showMessage: true,
+        });
+        //atualiza os dados
+        const retorno = await api.get("/TiposEvento");
+        setTipoEventos(retorno.data);
+        //reseta o state, volta para a tela de cadastro
+        editActionAbort();
+      }
+    } catch (error) {
+      //notifica o usuário que deu tudo errado
+      setNotifyUser({
+        titleNote: "Erro",
+        textNote: "Erro ao atualizar tipo de evento. Verifique sua conexão.",
+        imgIcon: "danger",
+        imgAlt:
+          "Imagem de ilustração de falha. Rapaz segurando um balão com símbolo x.",
+        showMessage: true,
+      });
+    }
+  }
   return (
     <MainContent>
       <Notification {...notifyUser} setNotifyUser={setNotifyUser} />
+      {showSpinner ? <Spinner /> : null}
       <section className="cadastro-evento-section">
         <Container>
           <div className="cadastro-evento__box">
@@ -186,7 +237,7 @@ const TipoEventosPage = () => {
 
       <section className="lista-eventos-section">
         <Container>
-          <Title titleText={"Listar tipo eventos"} color="white" />
+          <Title titleText={"Listar tipos de eventos"} color="white" />
           <TableEventType
             dados={tipoEventos}
             fnUpdate={showUpdateForm}

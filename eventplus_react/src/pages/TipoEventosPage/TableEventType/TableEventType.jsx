@@ -26,7 +26,9 @@ const TableEventType = ({ dados, fnUpdate, fnDelete }) => {
         {dados.map((tp) => {
           return (
             <tr className="table-data__head-row">
-              <td className="table-data__data table-data__data--big">{tp.titulo}</td>
+              <td className="table-data__data table-data__data--big">
+                {tp.titulo}
+              </td>
 
               <td className="table-data__data table-data__data--little">
                 <img
