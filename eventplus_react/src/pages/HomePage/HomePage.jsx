@@ -1,62 +1,65 @@
 import React, { useEffect, useState } from "react";
 import "./HomePage.css";
-import Title from "../../components/Title/Title";
-import MainContent from "../../components/Main/MainContent";
-import Banner from "../../components/Banner/Banner";
-import NextEvent from "../../components/NextEvent/NextEvent";
-import Container from "../../components/Container/Container";
-import VisionSection from "../../components/VisionSection/VisionSection";
-import ContactSection from "../../components/ContactSection/ContactSection";
+import Banner from "../../componentes/Banner/Banner";
+import Container from "../../componentes/Container/Container";
+import NextEvent from "../../componentes/NextEvent/NextEvent";
+import ContactSection from "../../componentes/ContactSection/ContactSection";
+import MainContent from "../../componentes/MainContent/MainContent";
+import VisionSection from "../../componentes/VisionSection/VisionSection";
+import Titulo from "../../componentes/Titulo/Titulo";
 import api from "../../Services/Service";
+import { nextEventResource } from "../../Services/Service";
 
 const HomePage = () => {
-  useEffect(() => {
-    async function getProximosEventos() {
+  const [nextEvents, setNextEvents] = useState([]); 
+
+  useEffect(()=> {
+    async function  getNextEvents() {
       try {
-        const promise = await api.get(
-          "http://localhost:5000/api/Evento/ListarProximos"
-        );
+        const promise = await api.get(nextEventResource)
+        const dados = await promise.data;
 
-        console.log(promise.data);
-        setNextEvents(promise.data);
+        setNextEvents(dados); //atualiza o estado
       } catch (error) {
-        console.log("Deu ruim na API");
-      }
+        alert("Deu ruim na api!")
+      }   
     }
-    getProximosEventos();
-    console.log("A home foi montada");
-  }, []);
+     getNextEvents(); //roda a função
+  }, [])
 
-  // FAKE MOCK - API MOCADA
-  const [nextEvents, setNextEvents] = useState([]);
+
+
   return (
-    <div>
-      <MainContent>
-        <Banner />
+    <MainContent>
+      <Banner />
 
-        <section className="proximos-eventos">
-          <Container>
-            <Title titleText={"Próximos Eventos"} />
+      <section className="proximos-eventos">
+        <Container>
+          <Titulo titleText={"Próximos Eventos"} />
 
-            <div className="events-box">
-              {nextEvents.map((e) => {
-                return (
-                  <NextEvent
-                    title={e.nomeEvento}
-                    description={e.descricao}
-                    eventDate={e.dataEvento}
-                    idEvent={e.idEvento}
-                  />
-                );
-              })}
-            </div>
-          </Container>
-        </section>
+          <div className="events-box">
 
-        <VisionSection />
-        <ContactSection />
-      </MainContent>
-    </div>
+           {
+            nextEvents.map((e) => {
+              return (
+              <NextEvent 
+              key={e.idEvento}
+              title={e.nomeEvento}
+              description={e.descricao}
+              eventDate={e.dataEvento}
+              idEvent={e.idEvento}
+              />
+              );
+            })
+           }
+
+          </div>
+        </Container>
+      </section>
+
+      <VisionSection />
+      <ContactSection />
+    </MainContent>
   );
 };
 

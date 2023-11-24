@@ -1,6 +1,7 @@
-import './App.css';
-import Rotas from './routes.js';
+import Rotas from './route';
 
-const App = () => <Rotas/>
+import './App.css';
+
+const App = () => <Rotas/> 
 
 export default App;
