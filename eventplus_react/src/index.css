@@ -10,21 +10,34 @@
 }
 
 body {
-  font-family: 'Poppins-Regular','Courier New', Courier, monospace;
+  font-family: "Poppins-Regular", "Courier New", Courier, monospace;
 }
 
+/* Estilizar a barra de rolagem */
+::-webkit-scrollbar {
+  width: 7px; /* Largura da barra de rolagem */
+}
+
+/* Estilizar o botão de rolagem */
+::-webkit-scrollbar-thumb {
+  background-color: #b51d44; /* Cor do botão de rolagem */
+  border-radius: 6px; /* Cantos arredondados do botão de rolagem */
+}
+
+/* Estilizar a área de rastreamento (trilha) */
+::-webkit-scrollbar-track {
+  background-color: #ba6e81; /* Cor da área de rastreamento */
+}
 :root {
   /* Variáveis de tema */
-  
+
   /* smartphone */
   --color-white: #fff;
   --color-dark-blue: #201849;
   --color-blue-red: #511948;
-  --color-medium-red: #821B47;
-  --color-red: #B51D44;
+  --color-medium-red: #821b47;
+  --color-red: #b51d44;
   --text-color: #000;
-  
+
   /* desktop */
-
 }
-

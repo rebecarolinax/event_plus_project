@@ -4,6 +4,7 @@ import axios from "axios";
 export const eventResource = '/Evento';
 export const nextEventResource = '/Evento/ListarProximos'
 export const eventsTypeResource = '/TiposEvento'
+export const loginResource = '/Login'
 
 // USUARIOS
 export const usersTypeResource = '/TiposUsuario'

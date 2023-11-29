@@ -17,10 +17,10 @@ const TableEv = ({ dados, fnDelete = null, fnUpdate = null }) => {
             Descrição
           </th>
           <th className="table-data__head-title table-data__head-title--big">
-            Tipo de evento
+            Tipo
           </th>
           <th className="table-data__head-title table-data__head-title--big">
-            Data do Evento
+            Data
           </th>
           <th className="table-data__head-title table-data__head-title--little">
             Editar
