@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ImageIllustrator from "../../componentes/ImageIllustrator/ImageIllustrator";
 import logo from "../../assets/images/logo-pink.svg";
 import { Input, Button } from "../../componentes/FormComponents/FormComponents";
@@ -8,6 +8,7 @@ import api from "../../Services/Service";
 import Notification from "../../componentes/Notification/Notification";
 import "./LoginPage.css";
 import { UserContext, userDecodeToken } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [notifyUser, setNotifyUser] = useState(); // componente notification
@@ -17,6 +18,13 @@ const LoginPage = () => {
   });
 
   const { userData, setUserData } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userData.nome) {
+      navigate("/");
+    }
+  }, [userData]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -33,6 +41,7 @@ const LoginPage = () => {
         setUserData(userFullToken);
 
         localStorage.setItem("token", JSON.stringify(userFullToken));
+        navigate("/");
       } catch (error) {
         console.log(error);
       }
