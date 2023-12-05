@@ -14,8 +14,8 @@ const Table = ( {data, deleteFn = null, showEditFormFn = null} ) => {
                     <th className="table-data__head-title table-data__head-title--big">Descrição</th>
                     <th className="table-data__head-title table-data__head-title--big">Tipo de Evento</th>
                     <th className="table-data__head-title table-data__head-title--big">Data</th>
-                    <th className="table-data__head-title table-data__head-title--little">Editar</th>
-                    <th className="table-data__head-title table-data__head-title--little">Deletar</th>
+                    <th className="table-data__head-title table-data__head-title--big">Ações</th>
+
                 </tr>
             </thead>
             <tbody>

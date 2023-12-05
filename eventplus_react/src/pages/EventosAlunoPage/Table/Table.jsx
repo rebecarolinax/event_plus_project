@@ -20,12 +20,6 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
           <th className="tbal-data__head-title tbal-data__head-title--big">
             Evento
           </th>
-          {/* <th className="tbal-data__head-title tbal-data__head-title--big">
-            Descrição
-          </th> */}
-          {/* <th className="tbal-data__head-title tbal-data__head-title--big">
-            Tipo
-          </th> */}
           <th className="tbal-data__head-title tbal-data__head-title--big">
             Data
           </th>
@@ -55,7 +49,10 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
                   onClick={fnShowModal}
                 />
 
-                <ToggleSwitch manipulationFunction={fnConnect} toggleActive={false}/>
+                <ToggleSwitch
+                  manipulationFunction={fnConnect}
+                  toggleActive={false}
+                />
               </td>
             </tr>
           );

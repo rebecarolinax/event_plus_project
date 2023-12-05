@@ -13,7 +13,7 @@ const NextEvent = ( {title, description, date, idEvent} ) => {
 
     return (
         <article className='event-card'>
-            <h2 className="event-card__title">{title.substring(0, 15)}...</h2>
+            <h2 className="event-card__title">{title.substring(0, 10)}...</h2>
             <p 
                 className="event-card__description"
                 data-tooltip-id={idEvent}
