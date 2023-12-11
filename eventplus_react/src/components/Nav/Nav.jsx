@@ -1,38 +1,38 @@
 import React, { useContext } from 'react';
 import './Nav.css';
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import logoMobile from "../../assets/images/images/logo-white.svg";
+import logoDesktop from "../../assets/images/images/logo-pink.svg";
+import { UserContext } from '../../context/AuthContext';
 
-import LogoMobile from '../../assets/images/logo-white.svg';
-import LogoDeskTop from '../../assets/images/logo-pink.svg';
-
-import { UserContext, userDecodeToken } from '../../context/AuthContext';
-
-const Nav = ({ showMobileNavBar, toggleShowMobileNavBar }) => {
-    const { userData } = useContext(UserContext);
+const Nav = ({ exibeNavbar, setExibeNavbar }) => {
+    const { userData }  = useContext(UserContext);
 
     return (
-        <nav className={`navbar ${showMobileNavBar ? 'exibeNavbar' : ''}`}>
-            <span className="navbar__close" onClick={toggleShowMobileNavBar}>x</span>
+        <nav className={`navbar ${exibeNavbar ? "exibeNavbar" : ""}`}>
+            <span onClick={() => {setExibeNavbar(false)}} className='navbar__close'>x</span>
 
-            <Link to='/' className="eventlogo">
-                <img className='eventlogo__logo-image' src={window.innerWidth >= 992 ? LogoDeskTop : LogoMobile} alt="" />
+            <Link to="/home" className='eventLogo'>
+                <img 
+                    className='eventlogo__logo-image'
+                    src={window.innerWidth >= 992 ? logoDesktop : logoMobile} 
+                    alt="Event+ Logo" 
+                />
             </Link>
-
+            
             <div className="navbar__items-box">
-                <Link to='/' className='navbar__item'>Home</Link>
+                <Link onClick={() => {setExibeNavbar(false)}} to="/home" className='navbar__item'>Home</Link>
 
                 {userData.nome && userData.role === "Administrador" ? (
                     <>
-                        <Link to='/tipo-eventos' className='navbar__item'>Tipos de Evento</Link>
-                        <Link to='/eventos' className='navbar__item'>Eventos</Link>
+                        <Link to="/eventos" className='navbar__item'>Eventos</Link>
+                        <Link to="/tiposeventos" className='navbar__item'>Tipos de Eventos</Link>
+                        <Link to="/instituicoes" className='navbar__item'>Instituições</Link>
                     </>
-                ):userData.nome && userData.role === "Comum" ?(
-                    <Link to='/eventosaluno' className='navbar__item'>Eventos Aluno</Link>
-                ):(
-                    null
-                )}
-                
+                ) : userData.nome && userData.role === "Comum" ? (
+                    <Link to="/eventos-aluno" className='navbar__item'>Eventos</Link>
+                ) : null}
             </div>
         </nav>
     );

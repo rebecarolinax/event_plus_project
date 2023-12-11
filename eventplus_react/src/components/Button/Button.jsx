@@ -1,10 +1,8 @@
 import React from 'react';
 
-const Button = ({ handleClick }) => {
+const Button = ({ textButton, type }) => {
     return (
-        <button type='submit' onClick={handleClick}>
-            Calcular
-        </button>
+        <button type={type}>{textButton}</button>
     );
 };
 

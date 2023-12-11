@@ -76,7 +76,6 @@
   }
   
   @media screen and (min-width: 992px) {
-
     .login {
       position: relative;
       z-index: 1;
@@ -136,4 +135,3 @@
       margin-top: 30px;
     }
   }
-  

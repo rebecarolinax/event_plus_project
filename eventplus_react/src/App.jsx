@@ -1,22 +1,22 @@
-import Rotas from "./routes/routes";
-import { UserContext } from "./context/AuthContext";
+import { useEffect, useState } from 'react';
+import './App.css';
 
-import { useEffect, useState } from "react";
-// importa nosso app encapsulado pelo sistema de roteamento
+import { UserContext } from './context/AuthContext';
+import Rotas from '../src/routes/routes';
 
 const App = () => {
-  const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState({});
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setUserData( token === null ? {}  : JSON.parse(token) );
-  }, []);
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        setUserData(token === null ? {} : JSON.parse(token))
+    }, [])
 
-  return (
-    <UserContext.Provider value={{ userData, setUserData }}>
-      <Rotas />
-    </UserContext.Provider>
-  );
+    return (
+        <UserContext.Provider value={ {userData, setUserData} }>
+            <Rotas/>
+        </UserContext.Provider>
+    );
 };
 
 export default App;

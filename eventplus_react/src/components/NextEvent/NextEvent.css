@@ -23,7 +23,7 @@
     padding: 25px;
     border: 1px solid var(--color-blue-red);
     border-radius: 5px;
-    overflow: hidden;
+    overflow: none;
 }
 
 .event-card__title {
@@ -53,7 +53,7 @@
 @media screen and (min-width: 992px) {
     .banner {
       height: 720px;
-      background-image: url(../../assets/images//banner-desktop.png);
+      background-image: url(../../assets/images/images/banner-desktop.png);
     }
   
     .events-box {
@@ -65,7 +65,7 @@
     }
 
     .event-card {
-      width: 220px;
-      height: 220px;
+      width: 275px;
+      height: 275px;
     }
   }

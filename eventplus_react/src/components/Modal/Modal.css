@@ -63,6 +63,7 @@
     flex-wrap: wrap;
   
     width: 100%;
+    margin-top: 70px;
   }
   
   .comentary__title {
@@ -101,12 +102,13 @@
   .comentary__button {
     font-family: Poppins-Regular;
     font-size: 1rem;
+    color: white;
   }
   
   @media screen and (min-width: 992px) {
     .modal__box {
-      width: 650px;
-      height: 600px;
+      width: 550px;
+      height: 550px;
       padding: 40px 35px;
     }
     .modal__title,
@@ -128,4 +130,3 @@
     }
   
   }
-  

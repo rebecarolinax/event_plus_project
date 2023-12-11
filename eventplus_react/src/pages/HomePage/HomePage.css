@@ -1,5 +1,3 @@
-
-
 .events-box {
     display: flex;
     flex-direction: column;
@@ -12,12 +10,9 @@
   /* --color-blue-red: #511948; */
   
   @media screen and (min-width: 992px) {
-    
-  
     .events-box {
       flex-direction: row;
       flex-wrap: wrap;
       margin: 50px 0;
     }
   }
-  
