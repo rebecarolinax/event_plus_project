@@ -1,0 +1,34 @@
+/* Smartphone */
+@font-face {
+    font-family: Poppins-Thin;
+    src: url(../../assets/fonts/Poppins/Poppins-Thin.ttf);
+}
+@font-face {
+    font-family: Poppins-Regular;
+    src: url(../../assets/fonts/Poppins/Poppins-Regular.ttf);
+}
+
+.perfil-usuario {
+    width: 150px;
+    /* height: 40px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid black; */
+
+
+}
+
+.perfil-usuario__menuitem {
+    font-family: Poppins-Regular;
+    font-size: 1rem;
+    color: #201849;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.perfil-usuario__icon {
+    width: 20px;
+    cursor: pointer;
+}
+/* 201849 */

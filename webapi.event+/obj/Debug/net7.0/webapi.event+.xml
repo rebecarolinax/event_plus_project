@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>webapi.event+</name>
+    </assembly>
+    <members>
+        <member name="T:webapi.event_.Contexts.Event_Context">
+            <summary>
+            Classe de contexto que faz referências as tabelas e define string de conexão
+            </summary>
+        </member>
+        <member name="M:webapi.event_.Contexts.Event_Context.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)">
+            <summary>
+            Define as opções de construção do banco
+            </summary>
+            <param name="optionsBuilder">Objeto com as configurações definidas</param>
+        </member>
+        <member name="T:webapi.event_.Migrations.EventRebeca">
+            <inheritdoc />
+        </member>
+        <member name="M:webapi.event_.Migrations.EventRebeca.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:webapi.event_.Migrations.EventRebeca.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:webapi.event_.Migrations.EventRebeca.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:webapi.event_.Migrations.BDAzure">
+            <inheritdoc />
+        </member>
+        <member name="M:webapi.event_.Migrations.BDAzure.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:webapi.event_.Migrations.BDAzure.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:webapi.event_.Migrations.BDAzure.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
